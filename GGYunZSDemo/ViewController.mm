@@ -5,8 +5,8 @@
 //  Created by __无邪_ on 16/6/23.
 //  Copyright © 2016年 __无邪_. All rights reserved.
 //
-#import "Configure.h"
 #import "ViewController.h"
+#import "Configure.h"
 #import "USCSpeechUnderstander.h"
 #import "USCSpeechResult.h"
 
@@ -31,7 +31,7 @@
     self.speechUnderstander = speechUnderstander;
     self.speechUnderstander.delegate = self;
     
-    
+//    [self.speechUnderstander setVadFrontTimeout:3000 backTime:1000];
     
 }
 
@@ -41,6 +41,10 @@
 }
 
 - (IBAction)startAction:(id)sender {
+    //general
+    //16000
+    [self.speechUnderstander setEngine:@"general"];
+    [self.speechUnderstander setBandwidth:16000];
     [self.speechUnderstander start];
     
 }
@@ -100,21 +104,13 @@
     if(error)
     {
         NSLog(@"出错了");
-//        self.statusLabel.textColor = [UIColor redColor];
-//        self.statusLabel.text = [NSString stringWithFormat:@"状态:%@",error.domain];
-//        [self.btn setSelected:NO];
         return;
     }
     else if (self.asrString.length == 0 )
     {
         NSLog(@"没有听到声音");
-//        self.statusLabel.textColor = [UIColor redColor];
-//        self.statusLabel.text = @"状态:没有听到声音";
     }
     NSLog(@"done");
-//    [self.btn setSelected:NO];
-//    self.statusLabel.textColor = [UIColor blackColor];
-//    self.statusLabel.text = @"状态: 语义理解完成";
 }
 
 @end
